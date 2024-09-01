@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "142442304239",
+    "project_id": "routeka-1709731511177",
+    "storage_bucket": "routeka-1709731511177.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142442304239:android:2d06aaa2ae7c3752e6411a",
+        "android_client_info": {
+          "package_name": "com.routeka.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdR98aV-DN3DC5D4zMAx3nX8ZvbEWCWeo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
