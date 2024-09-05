@@ -568,28 +568,36 @@ class _Payment_ScreenState extends State<Payment_Screen> {
                                                             Get.back();
                                                           }
                                                         });
-                                                      }else if (from12.paymentdata[payment].title == "Cinetpay") {
-                                                        CinetPayCheckout(
-                                                            title: 'Guichet de paiement',
+                                                      } else if (from12.paymentdata[payment].title == 'Cinetpay'){
+                                                        Get.to(CinetPayCheckout(
+                                                            title: 'Guichet de transaction Routeka',
                                                             configData: <String, dynamic> {
                                                               'apikey': '63166275965f879eebbcf60.62241459',
-                                                              'site_id': '5878408',
-                                                              'notify_url': 'https://kpanel.routeka.com/Notify_url/'
+                                                              'site_id':'5878408',
+                                                              'notify_url': 'https://kpanel.routeka.com/cinetpay/Notify_url.php'
                                                             },
-                                                            paymentData: <String, dynamic> {
-                                                              'transaction_id': '12',
-                                                              'amount': 100,
+                                                            paymentData: <String, dynamic>{
+                                                              'transaction_id': genererNumeroID(),
+                                                              'amount': totalPayment.toStringAsFixed(2),
                                                               'currency': 'XOF',
                                                               'channels': 'ALL',
-                                                              'description': 'Test de paiement'
+                                                              'description': 'Payment test',
+                                                              'customer_country':'CI'
+
                                                             },
                                                             waitResponse: (response) {
                                                               print(response);
                                                             },
                                                             onError: (error) {
-                                                          print(error);
-                                                        }
-                                                      );
+                                                              print(error);
+                                                            }))!
+                                                            .then((otid) {
+                                                          if (otid != null) {
+                                                            Book_Ticket( uid: widget.uid, bus_id: widget.bus_id,pick_id: widget.pick_id, dropId: widget.dropId, ticketPrice: widget.ticketPrice,trip_date: widget.trip_date,paymentId: "$otid",boardingCity: widget.boardingCity,dropCity: widget.dropCity,busPicktime: widget.busPicktime,busDroptime: widget.busDroptime,Difference_pick_drop: widget.differencePickDrop);
+                                                          } else {
+                                                            Get.back();
+                                                          }
+                                                        });
                                                       }
                                                       // else if(from12.paymentdata[payment].title == "Midtrans"){
                                                       //   Get.to(() => MidTrans(
