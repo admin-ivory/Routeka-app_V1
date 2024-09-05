@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+
 import 'package:cinetpay/cinetpay.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,6 @@ import '../Payment_Getway/razorpay.dart';
 import '../Payment_Getway/senangpay.dart';
 import '../Payment_Getway/stripeweb.dart';
 import '../config/config.dart';
-import '../config/light_and_dark.dart';
 import '../config/light_and_dark.dart';
 import '../payment_getway/cinetpay.dart';
 import 'search_bus_screen.dart';
@@ -568,22 +568,28 @@ class _Payment_ScreenState extends State<Payment_Screen> {
                                                             Get.back();
                                                           }
                                                         });
-                                                      }else if (from12.paymentdata[payment].title == "Mobile Money") {
-                                                        Map<String, dynamic> paymentData = {
-                                                          'transaction_id': '12',
-                                                          'amount': totalPayment.toStringAsFixed(2),
-                                                          'currency': 'XOF',
-                                                          'channels': 'ALL',
-                                                          'description': 'Test de paiement'
-                                                        };
-
-                                                        Map<String, dynamic> configData = {
-                                                          'apikey': '63166275965f879eebbcf60.62241459',
-                                                          'site_id': '5878408',
-                                                          'notify_url': 'https://kpanel.routeka.com//cinetpay/Notify_url'
-                                                        };
-
-                                                        openCinetPay(context, paymentData, configData);
+                                                      }else if (from12.paymentdata[payment].title == "Cinetpay") {
+                                                        CinetPayCheckout(
+                                                            title: 'Guichet de paiement',
+                                                            configData: <String, dynamic> {
+                                                              'apikey': '63166275965f879eebbcf60.62241459',
+                                                              'site_id': '5878408',
+                                                              'notify_url': 'https://kpanel.routeka.com/Notify_url/'
+                                                            },
+                                                            paymentData: <String, dynamic> {
+                                                              'transaction_id': '12',
+                                                              'amount': 100,
+                                                              'currency': 'XOF',
+                                                              'channels': 'ALL',
+                                                              'description': 'Test de paiement'
+                                                            },
+                                                            waitResponse: (response) {
+                                                              print(response);
+                                                            },
+                                                            onError: (error) {
+                                                          print(error);
+                                                        }
+                                                      );
                                                       }
                                                       // else if(from12.paymentdata[payment].title == "Midtrans"){
                                                       //   Get.to(() => MidTrans(

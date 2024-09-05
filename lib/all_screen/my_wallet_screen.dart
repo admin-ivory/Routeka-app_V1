@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, depend_on_referenced_packages, camel_case_types, prefer_typing_uninitialized_variables, no_leading_underscores_for_local_identifiers, non_constant_identifier_names, sort_child_properties_last, unnecessary_const, use_build_context_synchronously, unnecessary_import
 
 import 'dart:convert';
+import 'package:cinetpay/cinetpay.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,6 +27,7 @@ import '../common_code/common_button.dart';
 import '../config/config.dart';
 import 'package:http/http.dart' as http;
 import '../config/light_and_dark.dart';
+import '../payment_getway/cinetpay.dart';
 import 'my_wallete_withdaw_screen.dart';
 import 'package:zigzag/agent_payout_controller_screen.dart';
 List<String> payType = ["UPI", "BANK Transfer", "Paypal"];
@@ -320,7 +322,7 @@ class _My_WalletState extends State<My_Wallet> {
                               maxHeight: 60,
                             ),
                             child: Lottie.asset('assets/lottie/wallet.json')),
-                        title: Transform.translate(offset: const Offset(-10, 0),child: const Text('TOTAL WALLET BALANCE',style: TextStyle(color: Colors.grey,fontSize: 14))),
+                        title: Transform.translate(offset: const Offset(-10, 0),child: Text('TOTAL WALLET BALANCE'.tr,style: TextStyle(color: Colors.grey,fontSize: 14))),
                         subtitle:  Transform.translate(
                           offset: const Offset(-10, 0),
                           child: Padding(
@@ -492,6 +494,36 @@ class _My_WalletState extends State<My_Wallet> {
                                                           Get.back();
                                                         }
                                                       });
+                                                    }
+                                                else if (from12.paymentdata[payment].title == 'Cinetpay'){
+                                                  Get.to(CinetPayCheckout(
+                                                      title: 'Guichet de transaction Routeka',
+                                                      configData: <String, dynamic> {
+                                                        'apikey': '63166275965f879eebbcf60.62241459',
+                                                        'site_id':'5878408',
+                                                        'notify_url': 'https://kpanel.routeka.com/cinetpay/Notify_url.php'
+                                                      },
+                                                      paymentData: <String, dynamic>{
+                                                        'transaction_id': genererNumeroID(),
+                                                        'amount': walletController.text,
+                                                        'currency': 'XOF',
+                                                        'channels': 'ALL',
+                                                        'description': 'Payment test',
+
+                                                      },
+                                                      waitResponse: (response) {
+                                                        print(response);
+                                                      },
+                                                      onError: (error) {
+                                                  print(error);
+                                                  }))!.then((otid) {
+                                                    Get.back();
+                                                    if (otid != null) {
+                                                      WalletUpdateApi(userData['id']);
+                                                    } else {
+                                                      Get.back();
+                                                    }
+                                                  });
                                                     }
 
                                                     else{

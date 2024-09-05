@@ -13,12 +13,12 @@ if (flutterRoot == null) {
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
-    flutterVersionCode = '1'
+    flutterVersionCode = '1.0.2'
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
+    flutterVersionName = '1.0.2'
 }
 
 apply plugin: 'com.android.application'
@@ -77,6 +77,7 @@ flutter {
 }
 
 dependencies {
+  //  implementation 'com.paypal.android:card-payments:CURRENT-VERSION-SNAPSHOT'
     implementation platform('com.google.firebase:firebase-bom:32.4.0')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-messaging'

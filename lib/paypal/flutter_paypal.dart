@@ -132,7 +132,7 @@ class UsePaypalState extends State<UsePaypal> {
     );
     setState(() {
       navUrl = widget.sandboxMode
-          ? 'https://api.sandbox.paypal.com'
+          ? 'https://sandbox.paypal.com'
           : 'https://www.api.paypal.com';
     });
     // Enable hybrid composition.

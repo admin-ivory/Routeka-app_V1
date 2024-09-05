@@ -16,7 +16,7 @@ import '../API_MODEL/search_bus_api_model.dart';
 import '../config/config.dart';
 import '../config/light_and_dark.dart';
 import 'seat_book_screen.dart';
-import '../api_model/new_request_api_model.dart';
+
 
 class Search_Bus_Screen extends StatefulWidget {
  final String boarding_id;
@@ -328,7 +328,7 @@ class _Search_Bus_ScreenState extends State<Search_Bus_Screen> {
               // SizedBox(height: 10,),
               Padding(
                 padding: const EdgeInsets.only(left: 20,right: 20),
-                child: Text('Zigzag fulfilled buses are not available at this time.'.tr,textAlign: TextAlign.center,style: const TextStyle(fontSize: 16,color: Colors.grey ,fontFamily: 'SofiaProBold'),),
+                child: Text('Aucun trajets disponible à cette date.'.tr,textAlign: TextAlign.center,style: const TextStyle(fontSize: 16,color: Colors.grey ,fontFamily: 'SofiaProBold'),),
               ),
             ],
           ) : Expanded(

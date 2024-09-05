@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NetworkError extends StatelessWidget {
   final Function loadData;
@@ -37,7 +38,7 @@ class NetworkError extends StatelessWidget {
               ),
               InkWell(
                 onTap: () => loadData(),
-                child: Text("Tap to retry",
+                child: Text("Tap to retry".tr,
                     style: TextStyle(
                         fontSize: 14,
                         color: Colors.black,

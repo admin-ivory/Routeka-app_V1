@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'dart:math';
 
-void openCinetPay(BuildContext context, Map<String, dynamic> paymentData, Map<String, dynamic> configData) {
+String genererNumeroID() {
+  // Obtenir la date actuelle au format 'YYYYMMDD'
+  DateTime now = DateTime.now();
+  String dateActuelle = "${now.year}${now.month.toString().padLeft(2, '0')}${now.day.toString().padLeft(2, '0')}";
+
+  // Générer une chaîne de 7 caractères aléatoires (combinant des lettres et des chiffres)
+  const String caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  Random random = Random();
+  String caracteresAleatoires = List.generate(7, (index) => caracteres[random.nextInt(caracteres.length)]).join();
+
+  // Combiner la date et les caractères aléatoires pour obtenir un ID de 15 caractères
+  return dateActuelle + caracteresAleatoires;
+}
+
+void openCinetPay(BuildContext context, Map<String, dynamic> paymentData, Map<String, dynamic> configData, ) {
   String paymentUrl = generateCinetPayUrl(configData, paymentData);
 
   Navigator.push(
