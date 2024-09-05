@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, file_names, avoid_print, depend_on_referenced_packages, empty_catches, unnecessary_brace_in_string_interps, non_constant_identifier_names, deprecated_member_use
+// ignore_for_file: camel_case_types, file_names, avoid_print, depend_on_referenced_packages, empty_catches, unnecessary_brace_in_string_interps
 
 import 'dart:async';
 import 'dart:convert';
@@ -80,17 +80,17 @@ class _Login_ScreenState extends State<Login_Screen> {
   ];
 
   List title = [
-    "Your Journey, Your Way",
-    "Seamless Travel Simplified",
-    "Book, Ride, Enjoy",
-    "Explore, One Bus at a Time"
+    "Vos trajets, Votre Journée",
+    "Le Voyage en 3 Click",
+    "Selectionnez, Réservez, Partez",
+    "La Côte D'ivoire à portée de Main"
   ];
 
   List description = [
-    'Customize your travel effortlessly.',
-    'Easy booking and boarding for a stress-free journey.',
-    'Swift booking and delightful bus rides.',
-    'Discover new places, one bus ride after another.',
+    'Voyagez sans effort.',
+    'Decouvrez le voyaage autrement.',
+    'Vos tickets au bouts des doigts.',
+    'Redecouvrons les routes Ivoiriennes',
   ];
 
   // LOGIN API
@@ -157,9 +157,6 @@ class _Login_ScreenState extends State<Login_Screen> {
         });
         Get.bottomSheet(Otp_Screen(verificationId: verificationId,ccode: ccode1,email: emailController.text,name: nameController.text,mobile: mobileController1.text,password: passwordController1.text,rcode: rcodeController.text, agettype: usertype,)).then((value) {
         });
-
-
-
       },codeAutoRetrievalTimeout: (String verificationId){
         verificationId = verificationId;
       },
@@ -238,8 +235,8 @@ class _Login_ScreenState extends State<Login_Screen> {
 
 
 
-  //  GET API CALLING
 
+  //  GET API CALLING
   Agentsignup? from12;
 
   Future SearchGet() async {
@@ -256,12 +253,12 @@ class _Login_ScreenState extends State<Login_Screen> {
   @override
   Widget build(BuildContext context) {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async{
         setState(() {
           referralcode = false;
         });
-        return Future(() => false);
       },
       child: Scaffold(
         bottomNavigationBar: Padding(
@@ -281,7 +278,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 20,),
-                      Text('Welcome To ProZigzagBus'.tr,style:  TextStyle(fontFamily: 'SofiaProBold',fontSize: 16,color: notifier.textColor)),
+                      Text('Welcome To Zigzag'.tr,style:  TextStyle(fontFamily: 'SofiaProBold',fontSize: 16,color: notifier.textColor)),
                       const SizedBox(height: 6,),
                       Text('We Will send OTP on this mobile number.'.tr,style:  TextStyle(fontWeight: FontWeight.bold,color: notifier.textColor)),
                       const SizedBox(height: 20,),
@@ -315,8 +312,8 @@ class _Login_ScreenState extends State<Login_Screen> {
                         flagsButtonPadding: EdgeInsets.zero,
                         showCountryFlag: false,
                         showDropdownIcon: false,
-                        initialCountryCode: 'IN',
-                        dropdownTextStyle: TextStyle(color: notifier.textColor,fontSize: 15),
+                        initialCountryCode: 'FR',
+                        dropdownTextStyle:  TextStyle(color: notifier.textColor,fontSize: 15),
                         onChanged: (number) {
                           setState(() {
                             ccode  =  number.countryCode;
@@ -393,6 +390,9 @@ class _Login_ScreenState extends State<Login_Screen> {
 
                         FocusManager.instance.primaryFocus?.unfocus();
 
+
+
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => const Otp_Screen(),));
                       }),
                       const SizedBox(height: 10,),
 
@@ -402,15 +402,24 @@ class _Login_ScreenState extends State<Login_Screen> {
                           onTap: () {
 
                             mobileCheck(mobileController.text, ccode).then((value) {
-                              if(mobileController.text.isNotEmpty){
-                                if(value["Result"] == "true"){
 
+                              if(mobileController.text.isNotEmpty){
+
+                                if(value["Result"] == "true"){
+                                  // setState(() {
+                                  //   isPassword = false;
+                                  // });
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text('Number is not register'.tr),behavior: SnackBarBehavior.floating, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),),
                                   );
                                   //false
                                 }else{
+
+                                  // setState(() {
+                                  //   isPassword = true;
+                                  // });
+
                                   // ForGot API CALLING CODE -
 
                                   _signInWithMobileNumber1();
@@ -427,6 +436,21 @@ class _Login_ScreenState extends State<Login_Screen> {
 
                               }
                             });
+
+
+
+
+
+                            // if(mobileController.text.isEmpty){
+                            //   ScaffoldMessenger.of(context).showSnackBar(
+                            //     SnackBar(content: const Text('Please Enter The Number'),behavior: SnackBarBehavior.floating, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),),
+                            //   );
+                            // }else{
+                            //   _signInWithMobileNumber1();
+                            // }
+
+
+
 
 
                           },
@@ -455,14 +479,14 @@ class _Login_ScreenState extends State<Login_Screen> {
 
                 from12?.agentStatus == "1" ? InkWell(
                     onTap: () {
-                      bottomSheet("AGENT",'Enlist as a ProZigzagBus Partner now!');
+                      bottomSheet("AGENT",'Enlist as a rOUTE Partner now!');
                     },
-                    child: Text("Join us as a ProZigzagBus Partner today!".tr,style: const TextStyle(fontFamily: 'SofiaProBold',fontSize: 13,color: Colors.green))
+                    child: Text("Rejoignez Routeka Maintenant!".tr,style: const TextStyle(fontFamily: 'SofiaProBold',fontSize: 13,color: Colors.green))
                 ) : const SizedBox(),
 
 
 
-                from12?.agentStatus == "1" ? const SizedBox(height: 10,) : const SizedBox(),
+                from12?.agentStatus == "1" ? const SizedBox(height: 10,) : SizedBox(),
               ],
             ),
           ),
@@ -484,7 +508,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                     Column(
                       children: [
                         const Image(image: AssetImage('assets/logo.png'),height: 70,width: 70),
-                        Text('ProZigzagBus'.tr,style: TextStyle(color: notifier.theamcolorelight,fontSize: 20,fontFamily: 'SofiaProBold'),),
+                        Text('Routeka'.tr,style: TextStyle(color: notifier.theamcolorelight,fontSize: 20,fontFamily: 'SofiaProBold'),),
                       ],
                     ),
 
@@ -517,6 +541,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                         ],
                         options: CarouselOptions(
                           height: 345,
+                          // aspectRatio: 16/9,
                           viewportFraction: 0.8,
                           initialPage: 0,
                           enableInfiniteScroll: true,
@@ -578,12 +603,13 @@ class _Login_ScreenState extends State<Login_Screen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   const SizedBox(height: 10,),
-                  Text(toptext.tr,style: TextStyle(color: notifier.textColor,fontSize: 20,fontFamily: 'SofiaProBold'),),
+                  Text(toptext.tr,style:  TextStyle(color: notifier.textColor,fontSize: 20,fontFamily: 'SofiaProBold'),),
                   const SizedBox(height: 10,),
                   CommonTextfiled2(txt: 'Enter Your Name'.tr,controller: nameController,context: context),
                   const SizedBox(height: 10,),
                   CommonTextfiled2(txt: 'Enter Your Email Id'.tr,controller: emailController,context: context),
                   const SizedBox(height: 10,),
+
 
                   IntlPhoneField(
                     controller: mobileController1,
@@ -612,7 +638,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                     flagsButtonPadding: EdgeInsets.zero,
                     showCountryFlag: false,
                     showDropdownIcon: false,
-                    initialCountryCode: 'IN',
+                    initialCountryCode: 'FR',
                     dropdownTextStyle:  TextStyle(color: notifier.textColor,fontSize: 15),
                     // style: const TextStyle(color: Colors.black,fontSize: 16),
                     onCountryChanged: (value) {
@@ -704,3 +730,91 @@ class _Login_ScreenState extends State<Login_Screen> {
   }
 
 }
+
+
+
+
+
+// SizedBox(
+// height: Get.height,
+// child: Stack(
+// alignment: Alignment.center,
+// children: [
+// Column(
+// children: <Widget>[
+//
+// const SizedBox(height: 30,),
+//
+// Column(
+// children: [
+// const Image(image: AssetImage('assets/logo.png'),height: 70,width: 70),
+// Text('zigzag'.tr,style: TextStyle(color: notifier.theamcolorelight,fontSize: 20,fontFamily: 'SofiaProBold'),),
+// ],
+// ),
+//
+// // const SizedBox(height: 50,),
+// const Spacer(flex: 1),
+// CarouselSlider(
+// items: [
+// for(int a =0; a< lottie12.length;a++) Column(
+// children: [
+// Lottie.asset(lottie12[a],height: 200),
+// const SizedBox(height: 30,),
+//
+// Text(title[a].toString().tr,style:  TextStyle(color: notifier.textColor,fontFamily: 'SofiaProBold',fontSize: 18),),
+// const SizedBox(height: 5,),
+// Container(
+// height : 2,
+// width: 70,
+// color: notifier.theamcolorelight,
+// ),
+// const SizedBox(height: 15,),
+// Expanded(
+// child: SizedBox(
+// // height: 50,
+// width: 200,
+// child: Text('${description[a]}',style: const TextStyle(color: Colors.grey,fontWeight: FontWeight.bold,fontSize: 13),textAlign: TextAlign.center),
+// ),
+// ),
+// ],
+// ),
+// ],
+// options: CarouselOptions(
+// height: 345,
+// // aspectRatio: 16/9,
+// viewportFraction: 0.8,
+// initialPage: 0,
+// enableInfiniteScroll: true,
+// reverse: false,
+// autoPlay: true,
+// autoPlayInterval: const Duration(seconds: 2),
+// autoPlayAnimationDuration: const Duration(milliseconds: 800),
+// autoPlayCurve: Curves.fastOutSlowIn,
+// enlargeCenterPage: true,
+// enlargeFactor: 0.3,
+// scrollDirection: Axis.horizontal,
+// )
+// ),
+// const Spacer(flex: 4),
+// ],
+// ),
+// isloding?  Center(child: Padding(padding: const EdgeInsets.only(top: 400), child: CircularProgressIndicator(color: notifier.theamcolorelight),)):const SizedBox(),
+// ],
+// ),
+// )
+
+
+
+//USER
+// {"UserLogin":{"id":"18","name":"om","mobile":"9999999999","password":"123","rdate":"2023-12-11 15:18:03","status":"1","ccode":"+91","code":"478060","refercode":null,"wallet":"0","email":"om1@gmail.com","user_type":"USER","is_verify":"1"},"currency":"$","ResponseCode":"200","Result":"true","ResponseMsg":"Sign Up Done Successfully!"}
+
+//AGENT
+//{id: 19, name: om2, mobile: 6666666666, password: 123, rdate: 2023-12-11 15:19:07, status: 1, ccode: +91, code: 798429, refercode: null, wallet: 0, email: om2@gmail.com, user_type: AGENT, is_verify: 0}, currency: $, ResponseCode: 200, Result: true, ResponseMsg: Sign Up Done Successfully!}
+
+
+
+// IS VERFY 1 TO : TICKET BOOK ONLY AGENT
+// IS BLOCKD TO NO : SEARCH AND NO OTHER FUNCTIONALTI USE
+// IS VERFY 0 TO : TICKET NO BOOK ONLY AGENT
+
+
