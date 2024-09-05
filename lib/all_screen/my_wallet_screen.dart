@@ -509,6 +509,7 @@ class _My_WalletState extends State<My_Wallet> {
                                                         'currency': 'XOF',
                                                         'channels': 'ALL',
                                                         'description': 'Payment test',
+                                                        'customer_country':'CI'
 
                                                       },
                                                       waitResponse: (response) {
